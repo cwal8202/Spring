@@ -1,0 +1,99 @@
+객체의 일생을 프레임워크가 관리를 한다.
+
+● spring framework
+- java 개발에 있어 일정한 틀을 제공
+- 오픈소스, 프레임워크 안에 모듈화 되어있어서 모듈로 사용 가능, 웹 MVC 기능(MVC 패턴 이용 가능) 제공
+- Jdbc로 작업했던 동작들을 쉽게 할 수 있도록 data access 기능도 제공
+- core(핵심 기능) -> dependency injection : 개발자가 관리하던 의존성을 라이브러리가 관리(의존성 역전)
+   -> 기존 방식 : class가 동작하려면 dao기능을 사용하기 위해선 dao 객체가 field로 존재해야하므로 의존성이 존재하게 됨 -> 개발자가 관리하는 방식
+- spring boot vs spring framework : 둘 다 기능은 같지만, framework가 꽤 오랫동안 유지된 방식이라 과거의 방식이 유지되어 있음(설정에 손이 많이 감) / boot는 설정이 조금 더 손쉬워짐(간소화된 ver)
+
+▶ spring plugin 설치 
+- sts(spring tool suite) : eclipse 배포해주는 것
+   Spring Tools 4는 boot, sptring tools 3이 framework
+- sts 검색 - 사이트 아래로 scroll - tools 3 wiki - full distribution on Eclipse 4.16(우리 사용버전에 맞는 것 다운해야함) - zip 클릭 (다운) - 원하는 폴더에 압축 풀기 - 폴더 들어가면 sts-~~가 eclipse - sts.exe 실행
+
+spring boot
+spring framework
+들다 같은 거지만 framework는 오래 유지 된 것이라 과거의 행적이 남아있다
+boot는 framework의 설정이 간소화 된 것이다.
+
+
+- framework도 라이브러리가 필요하다
+spring tool suite
+특이하게 suite라고 부른다.
+
+
+Spring Tool Suite 4 = spring boot 버전이다.
+Spring Tool Suite 3 이 spring framework다.
+
+4.16version zip확장자로 다운로드하면 된다.
+
+
+*project 생성하는법
+New Spring Legacy Project - Persistence - Spring MVC project생성
+--- 만약에 Persistence 목록이 안뜨면 template Project 클릭 후 spring-defaults edit후 주소 바꾸면 된다.
+
+두번째 창은 package 작성하는곳
+
+
+*spring은 객체를 ioc가 관리하게 해준다.
+spring frame work에
+java instance 객체를 맡겨 놓고 필요할때마다 가져와서 쓸수 있게 할것이다
+그 대상이 (IversionOfControl) IOC라는 통이 있다.
+필요할때 달라고 하면 bean이라는 이름으로 담고 필요할때 baen을 꺼내서 의존성을 넣어준다.
+Spring-context
+
+
+
+
+** java project를 maven project 로 convert한 후
+porm.xml에서
+<dependencies>
+안에 maven repository에서 spring core, spring context, spring beans를 넣었다.
+</dependencies>
+
+*spring beans 생성
+자바에서 객체를 불러온것처럼 bean안에 모든 객체를 넣을 것이다.
+bean => xml 형식으로 관리
+
+bean.xml의 <bean>테그안에 객체를 넣고 id를 부여 한 후
+ApplicationContext객체를 통해서 가져올 수 있다.
+<bean class="pakcage이름.class이름" id="아무거나"></bean>
+
+<bean class="mybeans.MyLogic" id="second">
+	<constructor-arg ref="first"></constructor-arg>
+</bean>
+생성자를 baen안에 constructor-arg에서 관리를 한다.
+이때 생성자는 중복이 가능하다.
+불러진 객체는 똑같은 값을 참조한다.
+
+singleton pattern 싱글턴 패턴이다
+
+***bean에서 scope="prototype"를 설정하면
+달라고 할때마다 new 새로운 인스턴스로 생성해서 준다.
+ioc관리 대상에선 벗어난다. 달라고 할때마다 생성하기 때문!
+
+bean project 즉 myconfig.xml에 
+똑같은 객체를 넣어놓으면
+불러올때 NoUniqueBeanDefinitionException 예외가 나온다
+왜냐면 어떤거 줘야하는지 모르기때문. 그럴때 필요한게 id값이다.
+
+*primary="true"
+bean 테그 안의 설정값이다.
+방금처럼 어떤거 줘야할지 몰라서 예외가 나올떄
+우선순위로 제일 먼저 주게 하는 설정값이다.
+
+myconfig.xml에서 Namespaces에서 context를 체크 후
+source에 다시 오면 context 태그를 쓸 수 있다.
+<context:component-scan base-package="mybeans">
+이렇게 하면 component라는 annotation이 있는 클래스를 스캔해서 bean안에 넣는다.
+
+
+스프링 = 객체 관리를 위한 것
+객체 관리 통 만들어놓는다. 통 이름이 IOC
+IOC컨테이너가 어떻게 관리해야 할지 설정을 통해 알려준다.
+설정하는 방식으로 XML, JAVA ANNOTATION
+IOC컨테이너가 관리해야하는 객체, Bean이라고 부르는 자바 객체를 설정하고 있었다.
+Bean 여러개 등록 할 수 있고
+그때 필요한 객체를 type 또는 ID로 달라고 하면 알아서 의존성을 넣어준다.
