@@ -5,21 +5,23 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class SecondComponent {
-	private FirstComponent need;
+	@Autowired // 필드 위에 써주면 알아서 의존성 넣어줌
+	// 의존성이 필요한 객체에 필요한 객체를 bean으로 등록해뒀으면 필드에 @autowired 가능
+	private FirstcComponent need;
 	
-	@Autowired	// 알아서 의존성을 넣어준다.의존성 필요한 객체의 의존성을 미리 bean으로 등록했다면 
-				// autowired를 넣어서 알아서 값을 찾아준다.
-	public SecondComponent(FirstComponent need) {
+	// @Autowired  생성자 위에 써주어서 의존성 넣어줌
+	public SecondComponent(FirstcComponent need) {
 		super();
 		this.need = need;
 	}
-
-	public void setNeed(FirstComponent need) {
+	// @Autowired setter 위에 써주어서 의존성 넣어줌
+	public void setNeed(FirstcComponent need) {
 		this.need = need;
 	}
 
+	// 메소드에 붙이면 먼저 실행되므로 x -> 필드, 생성자, setter에 @Autowired 설정
 	public void myServiceMethod() {
-		System.out.println("의존성이 필요함");
+		System.out.println("의존성이 필요함.");
 		need.hello();
 	}
 }

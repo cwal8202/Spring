@@ -2,10 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
-
+	
+	<!-- myconfig.xml - namespaces에서 context 체크하고 source에 돌아오면 context 태그 사용 가능 -->
+	<!-- base-package : 패키지명 -->
 	<context:component-scan base-package="mybeans"></context:component-scan>	
-	<!--  해당 패키지 안에 있는 component 체크 후 bean으로 설정해준다.  -->
+	<!-- annotation @Component가 붙어있는 객체를 찾아 bean으로 등록해줌 -->	
 	<context:annotation-config></context:annotation-config>
+	<!-- annotation을 통해 의존성을 넣으라고 할 수 있음 -->
 </beans>

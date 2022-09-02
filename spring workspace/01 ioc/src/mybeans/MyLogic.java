@@ -4,11 +4,8 @@ public class MyLogic {
 	private MyBean mybean;
 	
 	public MyLogic(MyBean mybean) {
+		super();
 		this.mybean = mybean;
-	}
-
-	public MyBean getMybean() {
-		return mybean;
 	}
 
 	public void setMybean(MyBean mybean) {
