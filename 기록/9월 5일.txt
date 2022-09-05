@@ -1,0 +1,23 @@
+user 를 DB에 넣기
+
+maven 
+mysql driver필요
+mysql connector/j 8.0.30
+Apache Commons DBCP 2.9.0
+
+
+src/test/java는 테스트 코드이다.
+porm.xml에서 junit으로 test코드를 관리한다.
+junit test case 생성
+Run As 에서 junit 를 실행 할 수 있다.
+
+
+테스트를 위해서 JUNit을 사용하는데
+스프링환경에서 호환을 위해서 사용하는게 방금 다운받은 Spring TestContext Framework 
+
+runwith은 spring테스트할려고
+
+Spring TestContext Framework 은 JUNIT 4.12 버전 이후 부터 호환가능하다.
+
+만약 Bean에서 중복의 값이 있으면 primary로 우선순위 또는 이름을 지어 지정할 수 있다.
+
