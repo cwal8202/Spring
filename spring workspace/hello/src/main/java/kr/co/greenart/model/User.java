@@ -6,12 +6,20 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 public class User {
+	private int id;
 	@NotBlank(message = "이름을 입력해주세요")
 	@Size(min = 1, max = 4, message = "이름은 1 ~ 4자 사이여야 합니다.")
 	private String name;
 	@Positive(message = "양수를 입력해주세요")
 	@Max(value = 100, message = "최대값(100)을 초과했습니다.")
 	private int age;
+	
+	public User(int id,String name, int age) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.age = age;
+	}
 	
 	public User(String name, int age) {
 		super();
@@ -21,6 +29,12 @@ public class User {
 	public User() {
 	}
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
