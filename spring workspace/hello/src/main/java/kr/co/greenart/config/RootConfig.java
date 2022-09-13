@@ -10,14 +10,15 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource("classpath:kr/co/greenart/config/mysql.properties")
-@ComponentScan("kr.co.greenart.model.car")
-@EnableTransactionManagement // transaction으로 관리할수 있는 관리자 등록 필요하다.
+//@ComponentScan("kr.co.greenart.model.car")
+@EnableTransactionManagement // transaction으로 관리할수 있는 관리자
 public class RootConfig {
 	@Value("${jdbc.drivername}")
 	private String drivername;
@@ -47,5 +48,11 @@ public class RootConfig {
 	@Bean
 	public PlatformTransactionManager txManager(DataSource ds) {
 		return new DataSourceTransactionManager(ds);
+	}
+	
+	@Bean
+	@Autowired
+	public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource ds) {
+		return new NamedParameterJdbcTemplate(ds);
 	}
 }

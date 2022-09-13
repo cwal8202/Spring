@@ -13,6 +13,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.greenart.config.RootConfig;
 import kr.co.greenart.model.car.Car;
@@ -20,6 +21,8 @@ import kr.co.greenart.model.car.CarService;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = RootConfig.class)
+@Transactional
+// @TransactionaConfiguration (defaultRollback = true) << 스프링 4버전 이하
 public class CarServiceTest {
 	@Autowired
 	private CarService service;
