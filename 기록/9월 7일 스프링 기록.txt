@@ -1,0 +1,26 @@
+예외가 발생했다면 queryForObject를 살펴본다
+queryForObject는 DataAccessException을 처리하는데
+이때 RuntimeException가 처리된다.
+
+
+
+
+
+
+**jdbc template 메소드 몇가지 더 살펴보기
+
+jdbcTemplate.queryForList는 
+List<Map<String, Object>> 형태로 반환을 한다.
+
+
+Bean으로 등록하고 그걸 들고 오는 방식
+Component 설정 후 componentscan하고 알아서 bean으로 등록되게
+
+
+*project이름 -> properties -> spring -> beanSupport -> add java config
+
+*window -> show view -> RequestMappings
+mapping 것들 볼 수 있다.
+
+*window -> show view -> spring explore 
+프로젝트 별로 bean으로 등록한 것들 볼 수 있다.

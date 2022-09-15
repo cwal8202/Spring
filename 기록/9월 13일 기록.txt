@@ -1,0 +1,39 @@
+같은 주소라도 요청 종류에 따라
+다양한 기능을 제공할 수 있겠다.
+
+
+json포멧으로 변경 하는 법은 pom.xml에서 dependency 추가하면 된다.
+
+경로 자체를 변수로 설정했다. @PathVariable 
+ 사용자 요청 주소 경로에 따라서 원하는 값 보여주게 했다.
+"/{id}"
+
+JSON은 RequestBody에 담아 보내라 라고 요청 Body에 Json자료를 담아야 한다.
+응답코드와 응답바디로 JSON형태로 반환한다.
+
+
+RestPoolApi 구현은 주소로 컨트롤한다.
+주소로 API요청 하는 것들
+
+
+
+
+
+model 객체 관리를 spring에선 쉽게 관리 가능하다.
+@SessionAttributes("modelname")
+session 처럼 쓰는것. 하지만 session보단 범위 작다.
+
+
+
+요청값이 redirect한번 하고자 할때마다 session에 값 추가하면 불필요한 session값들이 계속 생성
+될 수 있다. 한번에 redirect에만 가지는 session이 있으면 좋겠다. 그게 flash이다.
+
+interceptor : handler, controller 구현되기 전 후로 동작
+/ 요청 처리 전(핸들링 전) 사용자의 요청이 있었음을 기록 
+      // -> 매번 이 요청이 있음이 기록되길 원한다면? 
+      // -> 사용자가 요청할 때마다 반복되어야함 (servlet이 실행되기 전 'filter'가 작업을 수행)
+      // filter는 요청 주소로 동작, spring은 servlet이 하나이므로 filter 구현 어려움
+      // 그래서 servlet 지나는 controller(주소 매핑o) 전 후로 끼워 넣어서 구현 
+      // => 인터셉터 : handler, controller 구현되기 전 후로 동작
+
+Error를 전부 관리 할 수 있는 Error Handler를 만들수 있다.
