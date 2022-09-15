@@ -6,7 +6,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FileRepository {
-	public Resource getByName (String fileName);
+	public Resource getByName(String fileName);
 	public List<String> getAllnames();
 	public int save(MultipartFile file);
 }

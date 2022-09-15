@@ -1,28 +1,63 @@
 package kr.co.greenart.model.file;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 @Repository
 public class FileSystemRepository implements FileRepository {
+	private final File saveFolder = new File("d:\\temp\\");
+	private final Path root = Paths.get("d:\\temp\\");
+	
 	@Override
 	public Resource getByName(String fileName) {
-		throw new UnsupportedOperationException("미구현");
+		try {
+			return new UrlResource(new File(saveFolder.getAbsolutePath()
+					+ File.separatorChar
+					+ fileName).toURI());
+		} catch (MalformedURLException e) {
+			return null;
+		}
 	}
 
 	@Override
 	public List<String> getAllnames() {
-		throw new UnsupportedOperationException("미구현");
+		File[] filearr = saveFolder.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File pathname) {
+				return !pathname.isDirectory();
+			}
+		});
+		List<String> list = new ArrayList<>();
+		for (File f : filearr) {
+			list.add(f.getName());
+		}
+		
+		return list;
+		
+//		try {
+//			return Files.walk(root, 1)
+//				.filter(t -> !t.equals(root))
+//				.filter(x -> !Files.isDirectory(x))
+//				.map(y -> y.toString())
+//				.collect(Collectors.toList());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 	@Override
 	public int save(MultipartFile file) {
-		File saveFolder = new File("d:\\temp\\");
 		if (!saveFolder.exists()) {
 			saveFolder.mkdir();
 		}
